@@ -79,6 +79,10 @@ function validate(address, amount, currentAmount) {
   return stats;
 }
 
+function toUSD(bn) {
+  return new BN(bn.toString()).dividedBy(1e6).toString();
+}
+
 let Index = ({
   dispatchGeneFetch,
   pinnedDragons = [],
@@ -98,16 +102,29 @@ let Index = ({
   const [myBalance, setMyBalance] = useState('0.0');
 
   useEffect(() => {
+    let interval;
     if (etherProvider) {
       const contract = getContractInstance(etherProvider.getSigner(), 4);
       setUsdtContract(contract);
+
+      if (interval) {
+        clearInterval(interval);
+      }
       if (myAddress) {
-        // console.log(myAddress);
         contract.balanceOf(myAddress).then(balance => setMyBalance(
-          new BN(balance.toString()).dividedBy(1e6).toString()
+          toUSD(balance)
         ));
+        interval = setInterval(() => {
+          // console.log(myAddress);
+          contract.balanceOf(myAddress).then(balance => setMyBalance(
+            toUSD(balance)
+          ));
+        }, 10000); // 10s
       }
     }
+    return () => {
+      clearInterval(interval);
+    };
   }, [myAddress, etherProvider]);
 
   return (
