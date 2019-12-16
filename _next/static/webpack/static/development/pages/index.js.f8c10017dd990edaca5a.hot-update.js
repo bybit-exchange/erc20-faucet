@@ -1,42 +1,5 @@
 webpackHotUpdate("static/development/pages/index.js",{
 
-/***/ "./node_modules/@babel/runtime/helpers/extends.js":
-false,
-
-/***/ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js":
-false,
-
-/***/ "./node_modules/@material-ui/icons/Send.js":
-false,
-
-/***/ "./node_modules/@material-ui/icons/utils/createSvgIcon.js":
-false,
-
-/***/ "./node_modules/mdi-material-ui/Pickaxe.js":
-/*!*************************************************!*\
-  !*** ./node_modules/mdi-material-ui/Pickaxe.js ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var _createIcon = _interopRequireDefault(__webpack_require__(/*! ./util/createIcon */ "./node_modules/mdi-material-ui/util/createIcon.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var _default = (0, _createIcon["default"])('M14.79,10.62L3.5,21.9L2.1,20.5L13.38,9.21L14.79,10.62M19.27,7.73L19.86,7.14L19.07,6.35L19.71,5.71L18.29,4.29L17.65,4.93L16.86,4.14L16.27,4.73C14.53,3.31 12.57,2.17 10.47,1.37L9.64,3.16C11.39,4.08 13,5.19 14.5,6.5L14,7L17,10L17.5,9.5C18.81,11 19.92,12.61 20.84,14.36L22.63,13.53C21.83,11.43 20.69,9.47 19.27,7.73Z');
-
-exports["default"] = _default;
-
-/***/ }),
-
 /***/ "./pages/index.js":
 /*!************************!*\
   !*** ./pages/index.js ***!
@@ -81,7 +44,6 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
  // import InputBase from '@material-ui/core/InputBase';
 
- // import SendIcon from '@material-ui/icons/Send';
 
 
 
@@ -154,6 +116,10 @@ function validate(address, amount, currentAmount) {
   return stats;
 }
 
+function toUSD(bn) {
+  return new bignumber_js__WEBPACK_IMPORTED_MODULE_4___default.a(bn.toString()).dividedBy(1e6).toString();
+}
+
 var Index = function Index(_ref) {
   var dispatchGeneFetch = _ref.dispatchGeneFetch,
       _ref$pinnedDragons = _ref.pinnedDragons,
@@ -191,73 +157,89 @@ var Index = function Index(_ref) {
 
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])('0.0'),
       myBalance = _useState7[0],
-      setMyBalance = _useState7[1];
+      setMyBalance = _useState7[1]; // console.log('111');
+
 
   Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
+    var interval;
+
     if (etherProvider) {
       var contract = Object(_artifacts__WEBPACK_IMPORTED_MODULE_5__["getContractInstance"])(etherProvider.getSigner(), 4);
       setUsdtContract(contract);
 
+      if (interval) {
+        clearInterval(interval);
+      }
+
       if (myAddress) {
-        // console.log(myAddress);
         contract.balanceOf(myAddress).then(function (balance) {
-          return setMyBalance(new bignumber_js__WEBPACK_IMPORTED_MODULE_4___default.a(balance.toString()).dividedBy(1e6).toString());
+          return setMyBalance(toUSD(balance));
         });
+        interval = setInterval(function () {
+          // console.log(myAddress);
+          contract.balanceOf(myAddress).then(function (balance) {
+            return setMyBalance(toUSD(balance));
+          });
+        }, 10000); // 10s
       }
     }
+
+    return function () {
+      clearInterval(interval);
+    };
   }, [myAddress, etherProvider]);
   return __jsx(_components_Root__WEBPACK_IMPORTED_MODULE_12__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 115
+      lineNumber: 132
     },
     __self: this
   }, __jsx("div", {
     className: classes.header,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 116
+      lineNumber: 133
     },
     __self: this
   }, __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_9__["default"], {
     className: classes.font,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 117
+      lineNumber: 134
     },
     __self: this
   }, "Bybit Testnet USDT Faucet")), __jsx("div", {
     className: classes.mainCont,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 119
+      lineNumber: 136
     },
     __self: this
   }, __jsx(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_6__["default"], {
     className: classes.inputCont,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 120
+      lineNumber: 137
     },
     __self: this
   }, __jsx("div", {
     className: classes.cell,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 121
+      lineNumber: 138
     },
     __self: this
   }, __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_9__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 122
+      lineNumber: 139
     },
     __self: this
   }, "My Balance: ".concat(myBalance, " TUSDT"))), __jsx("div", {
     className: classes.line,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 124
+      lineNumber: 141
     },
     __self: this
   }, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -276,7 +258,7 @@ var Index = function Index(_ref) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 125
+      lineNumber: 142
     },
     __self: this
   }), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -288,7 +270,7 @@ var Index = function Index(_ref) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 133
+      lineNumber: 150
     },
     __self: this
   }, "Self")), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -309,11 +291,12 @@ var Index = function Index(_ref) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 135
+      lineNumber: 152
     },
     __self: this
   }), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
     className: classes.iconButton,
+    color: 'primary',
     "aria-label": 'Mint',
     variant: 'contained',
     onClick: function onClick(e) {
@@ -334,21 +317,21 @@ var Index = function Index(_ref) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 144
+      lineNumber: 161
     },
     __self: this
   }, "Mint Token", __jsx(mdi_material_ui_Pickaxe__WEBPACK_IMPORTED_MODULE_10___default.a, {
     className: classes.btnIcon,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 161
+      lineNumber: 179
     },
     __self: this
   }))), txs && txs.length > 0 && __jsx(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_6__["default"], {
     className: classnames__WEBPACK_IMPORTED_MODULE_11___default()(classes.inputCont, classes.upper),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 165
+      lineNumber: 183
     },
     __self: this
   }, txs.map(function (tx) {
@@ -357,7 +340,7 @@ var Index = function Index(_ref) {
       className: classes.tx,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 168
+        lineNumber: 186
       },
       __self: this
     }, __jsx("a", {
@@ -365,7 +348,7 @@ var Index = function Index(_ref) {
       href: "https://rinkeby.etherscan.io/tx/".concat(tx),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 169
+        lineNumber: 187
       },
       __self: this
     }, _short(tx, 8)));
@@ -377,4 +360,4 @@ var Index = function Index(_ref) {
 /***/ })
 
 })
-//# sourceMappingURL=index.js.c7fac8aa886f59df223e.hot-update.js.map
+//# sourceMappingURL=index.js.f8c10017dd990edaca5a.hot-update.js.map

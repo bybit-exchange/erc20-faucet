@@ -63,7 +63,7 @@ var useStyles = Object(_material_ui_styles__WEBPACK_IMPORTED_MODULE_2__["makeSty
       margin: '30px 0 20px 0'
     },
     by: {
-      fontSize: '0.7em'
+      fontSize: '1.2em'
     },
     icons: {
       display: 'flex'
@@ -147,7 +147,7 @@ var Root = function Root(_ref) {
         lineNumber: 99
       },
       __self: this
-    }, "Ethereum wallet connecting..."), __jsx(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }, "Waiting for Ethereum wallet..."), __jsx(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_3__["default"], {
       __source: {
         fileName: _jsxFileName,
         lineNumber: 100
@@ -177,42 +177,42 @@ var Root = function Root(_ref) {
       lineNumber: 110
     },
     __self: this
-  }, __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    className: classes.by,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 111
-    },
-    __self: this
-  }, "diaomouren@gmail.com"), __jsx("div", {
+  }, __jsx("div", {
     className: classes.icons,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 112
+      lineNumber: 111
     },
     __self: this
   }, __jsx(_material_ui_core_Chip__WEBPACK_IMPORTED_MODULE_7__["default"], {
     icon: __jsx(mdi_material_ui_GithubCircle__WEBPACK_IMPORTED_MODULE_8___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 114
+        lineNumber: 113
       },
       __self: this
     }),
     label: 'Star',
     className: classes.chip,
     component: "a",
-    href: "https://github.com/BigMurry/erc20-faucet",
+    href: "https://github.com/bybit-exchange/erc20-faucet",
     target: '_blank',
     clickable: true,
     color: "secondary",
     variant: "outlined",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 113
+      lineNumber: 112
     },
     __self: this
-  }))));
+  })), __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    className: classes.by,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 124
+    },
+    __self: this
+  }, "bybit exchange")));
 };
 
 var RootWrapper = function RootWrapper(props) {
