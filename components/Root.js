@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     margin: '30px 0 20px 0'
   },
   by: {
-    fontSize: '0.7em'
+    fontSize: '1.2em'
   },
   icons: {
     display: 'flex'
@@ -114,7 +114,7 @@ let Root = ({children, setError}) => {
             label={'Star'}
             className={classes.chip}
             component='a'
-            href={`https://github.com/BigMurry/erc20-faucet`}
+            href={`https://github.com/bybit-exchange/erc20-faucet`}
             target={'_blank'}
             clickable
             color='secondary'
