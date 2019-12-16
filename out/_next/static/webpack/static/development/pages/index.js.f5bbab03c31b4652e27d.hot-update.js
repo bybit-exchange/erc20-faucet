@@ -44,7 +44,6 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
  // import InputBase from '@material-ui/core/InputBase';
 
- // import SendIcon from '@material-ui/icons/Send';
 
 
 
@@ -117,6 +116,10 @@ function validate(address, amount, currentAmount) {
   return stats;
 }
 
+function toUSD(bn) {
+  return new bignumber_js__WEBPACK_IMPORTED_MODULE_4___default.a(bn.toString()).dividedBy(1e6).toString();
+}
+
 var Index = function Index(_ref) {
   var dispatchGeneFetch = _ref.dispatchGeneFetch,
       _ref$pinnedDragons = _ref.pinnedDragons,
@@ -157,70 +160,85 @@ var Index = function Index(_ref) {
       setMyBalance = _useState7[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
+    var interval;
+
     if (etherProvider) {
       var contract = Object(_artifacts__WEBPACK_IMPORTED_MODULE_5__["getContractInstance"])(etherProvider.getSigner(), 4);
       setUsdtContract(contract);
 
+      if (interval) {
+        clearInterval(interval);
+      }
+
       if (myAddress) {
-        // console.log(myAddress);
         contract.balanceOf(myAddress).then(function (balance) {
-          return setMyBalance(new bignumber_js__WEBPACK_IMPORTED_MODULE_4___default.a(balance.toString()).dividedBy(1e6).toString());
+          return setMyBalance(toUSD(balance));
         });
+        interval = setInterval(function () {
+          // console.log(myAddress);
+          contract.balanceOf(myAddress).then(function (balance) {
+            return setMyBalance(toUSD(balance));
+          });
+        }, 10000); // 10s
       }
     }
+
+    return function () {
+      clearInterval(interval);
+    };
   }, [myAddress, etherProvider]);
   return __jsx(_components_Root__WEBPACK_IMPORTED_MODULE_12__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 115
+      lineNumber: 131
     },
     __self: this
   }, __jsx("div", {
     className: classes.header,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 116
+      lineNumber: 132
     },
     __self: this
   }, __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_9__["default"], {
     className: classes.font,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 117
+      lineNumber: 133
     },
     __self: this
   }, "Bybit Testnet USDT Faucet")), __jsx("div", {
     className: classes.mainCont,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 119
+      lineNumber: 135
     },
     __self: this
   }, __jsx(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_6__["default"], {
     className: classes.inputCont,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 120
+      lineNumber: 136
     },
     __self: this
   }, __jsx("div", {
     className: classes.cell,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 121
+      lineNumber: 137
     },
     __self: this
   }, __jsx(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_9__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 122
+      lineNumber: 138
     },
     __self: this
   }, "My Balance: ".concat(myBalance, " TUSDT"))), __jsx("div", {
     className: classes.line,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 124
+      lineNumber: 140
     },
     __self: this
   }, __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -239,7 +257,7 @@ var Index = function Index(_ref) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 125
+      lineNumber: 141
     },
     __self: this
   }), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -251,7 +269,7 @@ var Index = function Index(_ref) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 133
+      lineNumber: 149
     },
     __self: this
   }, "Self")), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -272,7 +290,7 @@ var Index = function Index(_ref) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 135
+      lineNumber: 151
     },
     __self: this
   }), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -298,21 +316,21 @@ var Index = function Index(_ref) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 144
+      lineNumber: 160
     },
     __self: this
   }, "Mint Token", __jsx(mdi_material_ui_Pickaxe__WEBPACK_IMPORTED_MODULE_10___default.a, {
     className: classes.btnIcon,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 162
+      lineNumber: 178
     },
     __self: this
   }))), txs && txs.length > 0 && __jsx(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_6__["default"], {
     className: classnames__WEBPACK_IMPORTED_MODULE_11___default()(classes.inputCont, classes.upper),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 166
+      lineNumber: 182
     },
     __self: this
   }, txs.map(function (tx) {
@@ -321,7 +339,7 @@ var Index = function Index(_ref) {
       className: classes.tx,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 169
+        lineNumber: 185
       },
       __self: this
     }, __jsx("a", {
@@ -329,7 +347,7 @@ var Index = function Index(_ref) {
       href: "https://rinkeby.etherscan.io/tx/".concat(tx),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 170
+        lineNumber: 186
       },
       __self: this
     }, _short(tx, 8)));
@@ -341,4 +359,4 @@ var Index = function Index(_ref) {
 /***/ })
 
 })
-//# sourceMappingURL=index.js.cd9df22d505fa9d0d4b8.hot-update.js.map
+//# sourceMappingURL=index.js.f5bbab03c31b4652e27d.hot-update.js.map
