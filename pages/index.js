@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 // import InputBase from '@material-ui/core/InputBase';
-import SendIcon from '@material-ui/icons/Send';
+import MineIcon from 'mdi-material-ui/Pickaxe';
 import cn from 'classnames';
 
 import Root from '../components/Root';
@@ -141,6 +141,7 @@ let Index = ({
             onChange={e => setAmount(e.target.value)} />
 
           <Button className={classes.iconButton}
+            color={'primary'}
             aria-label={'Mint'}
             variant={'contained'}
             onClick={e => {
@@ -157,7 +158,7 @@ let Index = ({
               }
             }}>
             Mint Token
-            <SendIcon className={classes.btnIcon} />
+            <MineIcon className={classes.btnIcon} />
           </Button>
         </Paper>
         {txs && txs.length > 0 && (
