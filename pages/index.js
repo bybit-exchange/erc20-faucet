@@ -110,13 +110,13 @@ let Index = ({
       if (interval) {
         clearInterval(interval);
       }
-      if (myAddress) {
-        contract.balanceOf(myAddress).then(balance => setMyBalance(
+      if (address) {
+        contract.balanceOf(address).then(balance => setMyBalance(
           toUSD(balance)
         ));
         interval = setInterval(() => {
           // console.log(myAddress);
-          contract.balanceOf(myAddress).then(balance => setMyBalance(
+          contract.balanceOf(address).then(balance => setMyBalance(
             toUSD(balance)
           ));
         }, 10000); // 10s
@@ -125,7 +125,7 @@ let Index = ({
     return () => {
       clearInterval(interval);
     };
-  }, [myAddress, etherProvider]);
+  }, [address, etherProvider]);
 
   return (
     <Root>
