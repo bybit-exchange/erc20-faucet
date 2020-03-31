@@ -33574,13 +33574,13 @@ var Index = function Index(_ref) {
         clearInterval(interval);
       }
 
-      if (myAddress) {
-        contract.balanceOf(myAddress).then(function (balance) {
+      if (address) {
+        contract.balanceOf(address).then(function (balance) {
           return setMyBalance(toUSD(balance));
         });
         interval = setInterval(function () {
           // console.log(myAddress);
-          contract.balanceOf(myAddress).then(function (balance) {
+          contract.balanceOf(address).then(function (balance) {
             return setMyBalance(toUSD(balance));
           });
         }, 10000); // 10s
@@ -33590,7 +33590,7 @@ var Index = function Index(_ref) {
     return function () {
       clearInterval(interval);
     };
-  }, [myAddress, etherProvider]);
+  }, [address, etherProvider]);
   return __jsx(_components_Root__WEBPACK_IMPORTED_MODULE_12__["default"], {
     __source: {
       fileName: _jsxFileName,
@@ -33762,7 +33762,7 @@ var Index = function Index(_ref) {
 
 /***/ }),
 
-/***/ 1:
+/***/ 0:
 /*!******************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fadmin%2FProjects%2Ferc20-faucet%2Fpages%2Findex.js ***!
   \******************************************************************************************************************************/
@@ -33785,5 +33785,5 @@ module.exports = dll_ef0ff7c60362f24a921f;
 
 /***/ })
 
-},[[1,"static/runtime/webpack.js"]]]);
+},[[0,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=index.js.map
