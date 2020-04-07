@@ -4,7 +4,7 @@
   "description": "erc20-testnet faucet",
   "main": "index.js",
   "repository": "git@github.com:BigMurry/erc20-faucet.git",
-  "author": "BigMurry <hhdiao@siom.ac.cn>",
+  "author": "BigMurry",
   "license": "MIT",
   "scripts": {
     "build": "next build",
